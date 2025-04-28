@@ -1,40 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Form</title>
+    <title>Login Form</title>
 </head>
 <body>
-    <h2>Contact Form</h2>
+<h2>Login Form</h2>
 
-    <?php
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $name=trim($_POST['name']);
-        $email=trim($_POST['email']);
-        $message=trim($_POST['message']);
-        
-        if(empty($name)||empty($email)||empty($message)){
-            echo "<p style='color:red;>' All fieds are Required!</p>";
-        }else{
-            echo "<h2>Form Submitted Successfully:</h2>";
-            echo "<p><strong>Name:</strong>".htmlspecialchars($name)."</p>";
-            echo "<p><strong>Email:</strong>".htmlspecialchars($email)."</p>";
-            echo "<p><strong>Message:</strong>".htmlspecialchars($message)."</p>";
-        }
+<?php
+$valid_username="admin";
+$valid_password="password123";
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $username=trim($_POST['username']);
+    $password=trim($_POST['password']);
+
+    if($username===$valid_username && $password===$valid_password){
+        echo "<h3>Welcome,".htmlspecialchars($username)."!</h3>";
+    }else{
+        echo "<p style='color:red;'>Invalid username or password. Please try again.</p>";
     }
-    ?>
+}
+?>
 
-    <!-- Form Html -->
-     <form method="POST" action="">
-        <label for="name">Name:</label><br>
-        <input type="text" name="name" id="name"><br><br>
+<form method="POST" action="">
+    <label for="username">Username:</label><br>
+    <input type="text" name="username" id="username" required><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="text" name="email" id="emai"><br><br>
+    <label for="password">Password:</label><br>
+    <input type="password" name="password" id="password" required><br><br>
 
-        <label for="message">Message:</label><br>
-        <textarea name="message" id="message" rows="5"></textarea><br><br>
-
-        <input type="submit" value="Submit">
-     </form>
+    <input type="submit" value="Login">
+</form>
 </body>
 </html>
